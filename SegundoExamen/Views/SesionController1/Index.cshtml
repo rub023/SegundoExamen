@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using SegundoExamen.Models;
+@using SegundoExamen.Herramientas;
+
+<h3>Usando sesiones</h3>
+Nombre: @Context.Session.GetString("usuario")
+<br />
+Edad: @Context.Session.GetInt32("edad")
+<br>
+<br />
+
+<h3>Rescatando un objeto producto</h3>
+@{
+    Producto pr = Conversor.JsonAobjeto<Producto>(Context.Session, "producto");
+}
+<br />
+ID: @pr.Id
+<br />
+Nombre: @pr.Nombre
+<br />
+Precio: @pr.Precio
+<br />
+<h3>Rescatando una lista de objetos producto</h3>
+@{
+    List<Producto> prs = Conversor.JsonAobjeto<List<Producto>>(Context.Session, "productos");
+}
+
+@foreach (Producto p in prs)
+{
+    <div>
+        ID: @p.Id
+        <br />
+        Nombre: @p.Nombre
+        <br />
+        Precio: @p.Precio
+        <br />
+    </div>
+
+}
